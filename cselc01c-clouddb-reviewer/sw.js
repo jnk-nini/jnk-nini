@@ -1,6 +1,6 @@
 /* Offline support: app files are cached on first visit; fonts are cached when first fetched. */
 const CACHE="clouddb-reviewer-v1";
-const FILES=["./","index.html","style.css","app.js","data_notes.js","data_facts.js","data_cloze.js","data_tf.js","data_more.js","manifest.webmanifest","icon.svg","icon-192.png","icon-512.png"];
+const FILES=["./","index.html","style.css","app.js","data_notes.js","data_facts.js","data_cloze.js","data_tf.js","data_more.js","manifest.webmanifest","icon.svg"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener("fetch",e=>{
